@@ -1,0 +1,100 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "swagger-demo",
+    "description" : "swagger-demo API Docs",
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "http://localhost:8080"
+  } ],
+  "tags" : [ ],
+  "paths" : {
+    "/board/list" : {
+      "get" : {
+        "tags" : [ "게시판" ],
+        "operationId" : "게시판 리스트 조회",
+        "parameters" : [ {
+          "name" : "boardType",
+          "in" : "query",
+          "description" : "게시판 타입(`NOTICE`)",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "userNo",
+          "in" : "query",
+          "description" : "사용자No",
+          "required" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "200",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/board-list1167313392"
+                },
+                "examples" : {
+                  "게시판 리스트 조회" : {
+                    "value" : "[ {\r\n  \"boardNo\" : 1,\r\n  \"boardType\" : \"NOTICE\",\r\n  \"title\" : \"보드게임 회원 보집중\",\r\n  \"content\" : \"보드게임을 좋아하는 누구나 환영\",\r\n  \"userNo\" : 1004,\r\n  \"nickname\" : \"angel\",\r\n  \"creatAt\" : \"2023-12-04T04:14:26.184981\",\r\n  \"updateAt\" : \"2023-12-04T04:14:26.184981\"\r\n} ]"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "board-list1167313392" : {
+        "type" : "array",
+        "description" : "게시판 리스트",
+        "items" : {
+          "type" : "object",
+          "properties" : {
+            "creatAt" : {
+              "type" : "string",
+              "description" : "작성일"
+            },
+            "boardType" : {
+              "type" : "string",
+              "description" : "게시판 타입"
+            },
+            "userNo" : {
+              "type" : "number",
+              "description" : "사용자 No"
+            },
+            "nickname" : {
+              "type" : "string",
+              "description" : "닉네임"
+            },
+            "updateAt" : {
+              "type" : "string",
+              "description" : "수정일"
+            },
+            "title" : {
+              "type" : "string",
+              "description" : "제목"
+            },
+            "content" : {
+              "type" : "string",
+              "description" : "내용"
+            },
+            "boardNo" : {
+              "type" : "number",
+              "description" : "게시판 No"
+            }
+          },
+          "description" : "게시판 리스트"
+        }
+      }
+    }
+  }
+}

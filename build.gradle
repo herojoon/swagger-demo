@@ -1,0 +1,58 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.7.2'
+    id 'io.spring.dependency-management' version '1.0.12.RELEASE'
+    id 'com.epages.restdocs-api-spec' version '0.16.0'  // Rest Docs 생성을 위해 추가
+}
+
+group = 'com.herojoon'
+version = '1.0.0'
+
+java {
+    sourceCompatibility = '17'
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+// openapi3AfterClean 명령어 실행 시 clean 명령어와 openapi3 명령어 실행
+tasks.register('openapi3AfterClean') {
+    dependsOn 'clean', 'openapi3'
+    group "documentation"
+}
+
+openapi3 {
+    server = 'http://localhost:8080'  // 내 서버 URL
+    title = 'swagger-demo'  // Swagger 페이지 제목
+    description = 'swagger-demo API Docs'  // Swagger 페이지 설명
+    version = '1.0.0'  // Swagger Docs 버전
+    format = 'json'  // Swagger Docs 포맷 형식
+    outputFileNamePrefix = "swagger-demo"  // Swagger Docs 결과 파일 이름
+    outputDirectory = 'src/main/resources/static'  // Swagger Docs 결과 파일 생성 위치 지정
+}
+
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springdoc:springdoc-openapi-ui:1.7.0'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // TEST
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'com.epages:restdocs-api-spec-mockmvc:0.16.2'  // Rest Docs 생성을 위해 추가
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
