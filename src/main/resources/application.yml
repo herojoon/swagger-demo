@@ -2,5 +2,5 @@ springdoc:
   default-consumes-media-type: application/json;charset=UTF-8
   default-produces-media-type: application/json;charset=UTF-8
   swagger-ui:
-    url: /swagger-demo.json
-    path: /docs/swagger
+    url: /swagger-demo.json   # Swaager API Json 파일 실행 URL
+    path: /docs/swagger       # Swagger UI 실행 PATH
